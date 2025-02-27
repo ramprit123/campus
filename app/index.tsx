@@ -13,6 +13,11 @@ const styles = {
   descriptionText: "text-center text-xl leading-8",
   buttonContainer: "mt-10 max-w-sm mx-auto gap-y-4",
   loginText: "text-center text-blue-500",
+  button: {
+    backgroundColor: "#007bff",
+    padding: 10,
+    borderRadius: 20,
+  },
 };
 
 const TEXT = {
@@ -50,14 +55,10 @@ export default function Index() {
                   console.error("Error occurred: ", error);
                 }
               }}
-              style={{
-                backgroundColor: "#007bff",
-                padding: 10,
-                borderRadius: 20,
-              }}
+              style={styles.button}
             />
 
-            <Link href="/login">
+            <Link href="/login" accessibilityLabel="Login link">
               <Text className={styles.loginText}>{TEXT.loginText}</Text>
             </Link>
           </View>
