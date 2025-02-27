@@ -11,13 +11,33 @@ import {
   Platform,
 } from "react-native";
 
+const styles = {
+  container: "flex-1 items-center bg-gray-100 p-2 m-10",
+  image: "h-1/2 mb-4 aspect-square",
+  input: "w-full p-4 mb-4 bg-white rounded-lg border border-gray-300",
+  passwordInput: "w-full p-4 mb-6 bg-white rounded-lg border border-gray-300",
+  button: "w-full p-4 bg-blue-500 rounded-lg items-center",
+  buttonText: "text-white font-semibold",
+  link: "mt-4",
+  linkText: "text-blue-600",
+};
+
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    // Implement your login logic here
-    console.log("Email:", email, "Password:", password);
+    try {
+      if (!email || !password) {
+        console.error("Email and password are required");
+        return;
+      }
+      // Implement your login logic here
+      console.log("Email:", email, "Password:", password);
+    } catch (error) {
+      console.error("Login failed: ", error);
+      // Display an error message to the user
+    }
   };
 
   return (
@@ -26,10 +46,10 @@ export default function LoginForm() {
       style={{ flex: 1 }}
       keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
     >
-      <View className="flex-1 items-center bg-gray-100 p-2 m-10">
+      <View className={styles.container}>
         <Image
           source={IMAGES.LOGO} // Replace with your logo path
-          className="h-1/2 mb-4 aspect-square"
+          className={styles.image}
           resizeMode="contain"
           accessible={true}
           accessibilityLabel="App Logo"
@@ -37,7 +57,7 @@ export default function LoginForm() {
         />
 
         <TextInput
-          className="w-full p-4 mb-4 bg-white rounded-lg border border-gray-300"
+          className={styles.input}
           placeholder="Email"
           value={email}
           onChangeText={setEmail}
@@ -51,7 +71,7 @@ export default function LoginForm() {
         />
 
         <TextInput
-          className="w-full p-4 mb-6 bg-white rounded-lg border border-gray-300"
+          className={styles.passwordInput}
           placeholder="Password"
           secureTextEntry
           value={password}
@@ -64,22 +84,24 @@ export default function LoginForm() {
         />
 
         <TouchableOpacity
-          className="w-full p-4 bg-blue-500 rounded-lg items-center"
+          className={styles.button}
           onPress={handleLogin}
           accessible={true}
           accessibilityLabel="Login Button"
           accessibilityRole="button"
         >
-          <Text className="text-white font-semibold">Login</Text>
+          <Text className={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
         <Link
           href="/signup"
-          className="mt-4"
+          className={styles.link}
           accessibilityLabel="Sign Up Link"
           accessibilityRole="link"
         >
-          <Text className="text-blue-600">Don't have an account? Sign Up</Text>
+          <Text className={styles.linkText}>
+            Don't have an account? Sign Up
+          </Text>
         </Link>
       </View>
     </KeyboardAvoidingView>
