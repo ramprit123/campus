@@ -28,6 +28,7 @@ export const Button: React.FC<ButtonProps> = ({
   disabled = false,
   loading = false,
   style,
+  ...rest
 }) => {
   const buttonStyles = {
     primary: {
@@ -80,9 +81,11 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <TouchableOpacity
+      accessibilityLabel={title}
       style={combinedButtonStyle}
       onPress={onPress}
       disabled={disabled || loading} // Disable while loading
+      {...rest}
     >
       <View
         style={{
